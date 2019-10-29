@@ -29,15 +29,15 @@ def create_expense(eday, emoney, etype):
     return the expense as a dictionary otherwise
     '''
     if not is_integer(eday):
-        raise ValueError("not a valid day")
+        raise ValueError("Not a valid day")
     if not is_integer(emoney):
-        raise ValueError("not a valid amount of money")
-    if not in_interval(eday,1,30):
-        raise ValueError("not a valid day")
+        raise ValueError("Not a valid amount of money")
+    if not validate_day(eday):
+        raise ValueError("Not a valid day")
     if emoney < 0:
-        raise ValueError("not a valid amount of money")
+        raise ValueError("Not a valid amount of money")
     if not in_expense_types(etype):
-        raise ValueError("not a valid expense type")
+        raise ValueError("Not a valid expense type")
     return {"day":eday, "money":emoney, "type":etype}
 
 

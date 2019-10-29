@@ -2,7 +2,7 @@
 from functions import *
 from domain import *
 from tests import *
-from validations import is_integer,in_expense_types,in_interval
+from validations import is_integer,in_expense_types,in_interval,validate_day
 
 def help(expenseList,cmd,params,history):
     print("list - to show all expenses")
@@ -39,25 +39,62 @@ def read_command():
     return (command,params)
 
 def get_entire_list(expenseList):
+    '''
+    Show entire list
+    params:
+        expenseList - the list of expenses
+    print the list
+    '''
     for e in expenseList:
         print(tostr(e))
 
 def get_list_for_category(expenseList,category):
+    '''
+    Show list of expenses from a specified category
+    params:
+        expenseList - the list of expenses
+        category - the expense type
+    print the list
+    '''
     for e in expenseList:
         if get_type(e) == category:
             print(tostr(e))
 
 def get_list_money_grater(expenseList,category,value):
+    '''
+    Show list of expenses from a specified category with amount of money grater than a value
+    params:
+        expenseList - the list of expenses
+        category - the expense type
+        value - the value
+    print the list
+    '''
     for e in expenseList:
         if get_type(e) == category and get_money(e) > value:
             print(tostr(e))
 
 def get_list_money_less(expenseList,category,value):
+    '''
+    Show list of expenses from a specified category with amount of money less than a value
+    params:
+        expenseList - the list of expenses
+        category - the expense type
+        value - the value
+    print the list
+    '''
     for e in expenseList:
         if get_type(e) == category and get_money(e) < value:
             print(tostr(e))
 
 def get_list_money_equal(expenseList,category,value):
+    '''
+    Show list of expenses from a specified category with amount of money equal to a value
+    params:
+        expenseList - the list of expenses
+        category - the expense type
+        value - the value
+    print the list
+    '''
     for e in expenseList:
         if get_type(e) == category and get_money(e) == value:
             print(tostr(e))
@@ -69,13 +106,14 @@ def get_list(expenseList,cmd,params,history):
         expenseList - the list of expenses
         cmd - the command (list)
         params - the parameters of the wished type of list
+        (history)
     if valid input data - call the suitable function for the wished list
     raise an error otherwise
     '''
     if len(params) == 0:
         get_entire_list(expenseList)
     elif len(params) == 1:
-        if params[0] not in ['housekeeping', 'food', 'transport','clothing', 'internet', 'others']:
+        if not in_expense_types(params[0]):
             raise ValueError("Not a valid command")
         else:
             get_list_for_category(expenseList,params[0])
@@ -103,6 +141,8 @@ def sum(expenseList,cmd,params,history):
         cmd - the command ('sum')
         params - the parameters given by the user
         (history)
+    print the sum if valid input data
+    raise an error otherwise
     '''
     if len(params) != 1:
         raise ValueError("Not a valid command")
@@ -114,6 +154,13 @@ def sum(expenseList,cmd,params,history):
 def max_expense(expenseList,cmd,params,history):
     '''
     Print the day with maximum expenses/print the maximum expense of a certain day depending on the parameters given by the user
+    params:
+        expenseList - the list of expenses
+        cmd - the command('max')
+        params - the parameters of the command given by the user
+        (history)
+    print the result if valid input data
+    raise an error otherwise
     '''
     if len(params) != 1:
         raise ValueError("Not a valid command")
@@ -123,7 +170,7 @@ def max_expense(expenseList,cmd,params,history):
         result = day_with_max_expenses(expenseList)
         print('The day with maximum expenses is day: ' + str(result[0]) + ', ' + str(result[1]) + ' RON')
     else:
-        if not in_interval(int(params[0]),1,30):
+        if not validate_day(int(params[0])):
             raise ValueError("Not a valid command")
         expense = max_expense_on_day(expenseList,int(params[0]))
         if expense == {}:
@@ -132,25 +179,44 @@ def max_expense(expenseList,cmd,params,history):
             print('The maximum expense from day ' + params[0] + ' is: ' + str(get_money(expense)) + ' RON on ' + get_type(expense))
 
 def sort_days_ui(expenseList,cmd,params,history):
+    '''
+    Sort daily expenses in a category/the total daily expenses depending on user input
+    params:
+        expenseList - the list of expenses
+        cmd - the command('sort')
+        params - the parameters of the command given by the user ('day'/<category>)
+    print the daily expenses sorted if valid input data
+    raise an error otherwise
+    '''
     if len(params) != 1:
         raise ValueError("Not a valid command")
     if params[0] != 'day' and not in_expense_types(params[0]):
         raise ValueError("Not a valid command")
     if params[0] == 'day':
         lst = sort_days(expenseList)
-        for e in range(0,31):
+        for e in range(0,32):
             if lst[e][0] != 0:
                 print("Day: " + str(lst[e][1]) + ", total expenses: " + str(lst[e][0]) + " RON")
     else:
         lst = sort_days_in_category(expenseList,params[0])
-        for e in range(0,31):
+        for e in range(0,32):
             if lst[e][0] != 0:
                 print("Day: " + str(lst[e][1]) + ", expenses: " + str(lst[e][0]) + " RON")
 
 def filter_expenses(expenseList,cmd,params,history):
+    ''' 
+    Filter the list of expenses by category/by category and value depending on user input, update history
+    params:
+        expenseList - the list of expenses
+        cmd - the command ('filter')
+        params - the parameters of the command given by the user(<type>/<type> [</>/=] <value>)
+        history - for doing undo
+    print the filterd list if valid input data 
+    raise an error otherwise
+    '''
     if len(params) not in [1,3]:
         raise ValueError("Not a valid command")
-    if params[0] not in  ['housekeeping', 'food', 'transport','clothing', 'internet', 'others']:
+    if not in_expense_types(params[0]):
         raise ValueError("Not a valid command")
     if len(params) == 1:
         history.append(expenseList.copy())

@@ -1,3 +1,5 @@
+import datetime
+import calendar
 def is_integer(stringValue):
     '''
     Check if a string has an integer form
@@ -24,6 +26,10 @@ def in_interval(x,start,end):
         False - otherwise
     '''
     return x >= start and x <= end
+
+def validate_day(day):
+    today = datetime.datetime.now()
+    return day > 0 and day <= calendar.monthrange(today.year, today.month)[1]
 
 def in_expense_types(x):
     '''

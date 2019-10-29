@@ -42,11 +42,12 @@ def add_expense_certain_day(expenseList,eday,emoney,etype):
 
 def add_expense(expenseList,cmd,params,history):
     '''
-    Add an expense for the current day/for a certain day
+    Add an expense for the current day/for a certain day, update history
     params:
         expenseList - the list of expenses
         cmd - the command (add/insert)
         params - the parameters of the expense 
+        history - for doing undo
     call the suitable add function depending on command if valid input data
     raise an error otherwise
     '''
@@ -112,11 +113,12 @@ def remove_expenses_from_day(expenseList,day):
 
 def remove_expenses(expenseList,cmd,params,history):
     '''
-    Remove expenses from a certain day/category / between two days
+    Remove expenses from a certain day/category / between two days, update history
     params:
         expenseList - the list of expenses
         cmd - the command (remove)
         params - the parameters of the wished type of remove 
+        history - for doing undo
     if valid input data - calls the suitable remove function
     raise an error otherwise
     '''
@@ -127,17 +129,26 @@ def remove_expenses(expenseList,cmd,params,history):
             raise ValueError("Not a valid command")
         start_day = int(params[0])
         end_day = int(params[2])
-        if start_day > end_day or params[1] != 'to' or start_day < 1 or start_day > 30 or  end_day < 1 or end_day > 30:
+        if start_day > end_day or params[1] != 'to' or start_day < 1 or start_day > 31 or  end_day < 1 or end_day > 31:
             raise ValueError("Not a valid command")
         history.append(expenseList.copy())
         remove_expenses_between_two_days(expenseList,start_day,end_day)
+        if expenseList == history[len(history)-1]:
+            history.pop()
+            raise ValueError("There were no expenses to remove")
     else:
         if in_expense_types(params[0]):
             history.append(expenseList.copy())
             remove_expenses_from_category(expenseList,params[0])
+            if expenseList == history[len(history)-1]:
+                history.pop()
+                raise ValueError("There were no expenses to remove")
         elif is_integer(params[0]):
             history.append(expenseList.copy())
             remove_expenses_from_day(expenseList,int(params[0]))
+            if expenseList == history[len(history)-1]:
+                history.pop()
+                raise ValueError("There were no expenses to remove")
         else:
             raise ValueError("Not a valid command")
 
@@ -162,7 +173,7 @@ def day_with_max_expenses(expenseList):
     params:
         expenseList - the list of expenses
     output:
-        the day with maximum expenses
+        the day with maximum expenses and the amount of money
     '''
     dmax = -1
     max_expenses = -1
@@ -203,7 +214,7 @@ def sort_days(expenseList):
         the total daily expenses as a list of pairs(total day expenses,day)
     '''
     lst = []
-    for e in range (0,31):
+    for e in range (0,32):
         lst.append([0,e])
     for e in expenseList:
         lst[get_day(e)][0] += get_money(e)
@@ -220,7 +231,7 @@ def sort_days_in_category(expenseList,category):
         the sorted daily expenses as a list of pairs(total day expenses,day)
     '''
     lst = []
-    for e in range (0,31):
+    for e in range (0,32):
         lst.append([0,e])
     for e in expenseList:
         if get_type(e) == category:
@@ -229,6 +240,12 @@ def sort_days_in_category(expenseList,category):
     return lst
 
 def filter_by_category(expenseList, category):
+    '''
+    Keep only the expenses from the specified category
+    params:
+        expenseList - the list of expenses
+        category - the expense type
+    '''
     copyList = expenseList.copy()
     expenseList.clear()
     for e in copyList:
@@ -236,6 +253,13 @@ def filter_by_category(expenseList, category):
             expenseList.append(e)
 
 def filter_by_category_value_less(expenseList, category, value):
+    '''
+    Keep only the expenses from the specified category less than a value
+    params:
+        expenseList - the list of expenses
+        category - the expense type
+        value - the value
+    '''
     copyList = expenseList.copy()
     expenseList.clear()
     for e in copyList:
@@ -243,6 +267,13 @@ def filter_by_category_value_less(expenseList, category, value):
             expenseList.append(e)
 
 def filter_by_category_value_grater(expenseList, category, value):
+    '''
+    Keep only the expenses from the specified category grater than a value
+    params:
+        expenseList - the list of expenses
+        category - the expense type
+        value - the value
+    '''
     copyList = expenseList.copy()
     expenseList.clear()
     for e in copyList:
@@ -250,6 +281,13 @@ def filter_by_category_value_grater(expenseList, category, value):
             expenseList.append(e)
 
 def filter_by_category_value_equal(expenseList, category, value):
+    '''
+    Keep only the expenses from the specified category that equals a value
+    params:
+        expenseList - the list of expenses
+        category - the expense type
+        value - the value
+    '''
     copyList = expenseList.copy()
     expenseList.clear()
     for e in copyList:
@@ -257,6 +295,16 @@ def filter_by_category_value_equal(expenseList, category, value):
             expenseList.append(e)
 
 def undo(expenseList,cmd,params,history):
+    '''
+    Reverse the last operation that modified program data
+    params:
+        expenseList - the list of expenses
+        cmd - the command('undo')
+        params - the parameters of the command given by the user (should be empty)
+        history - stores the program data before every such an operation
+    undo the last operation if valid input
+    raise an error otherwise or if no more undos
+    '''
     if len(params) != 0:
         raise ValueError("Not a valid command")
     if len(history) == 0:
