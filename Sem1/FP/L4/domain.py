@@ -1,4 +1,4 @@
-from validations import is_integer
+from validations import *
 
 '''
 expense <day>(between 1 and 30),<money>(positive integer),<expense type>(housekeeping, food, transport, clothing, internet, others)
@@ -32,13 +32,14 @@ def create_expense(eday, emoney, etype):
         raise ValueError("not a valid day")
     if not is_integer(emoney):
         raise ValueError("not a valid amount of money")
-    if eday < 1 or eday > 30 :
+    if not in_interval(eday,1,30):
         raise ValueError("not a valid day")
-    if emoney < 0 or int(emoney) != emoney:
+    if emoney < 0:
         raise ValueError("not a valid amount of money")
-    if etype not in ['housekeeping', 'food', 'transport','clothing', 'internet', 'others']:
+    if not in_expense_types(etype):
         raise ValueError("not a valid expense type")
     return {"day":eday, "money":emoney, "type":etype}
+
 
 def init_expenses():
     '''
@@ -59,4 +60,4 @@ def init_expenses():
     return expenses
 
 def tostr(expense):
-    return 'day: ' + str(get_day(expense)) + ', money: ' + str(get_money(expense)) + ', expense type: ' + str(get_type(expense))
+    return 'day: ' + str(get_day(expense)) + ', money: ' + str(get_money(expense)) + ' RON, expense type: ' + str(get_type(expense))
