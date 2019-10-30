@@ -254,7 +254,7 @@ def start():
             except ValueError as ve:
                 print(ve)
         else:
-            print("Bad command")
+            print("Not a valid command")
 
 def call_tests():
     test_create_expense()

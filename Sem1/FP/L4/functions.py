@@ -143,7 +143,7 @@ def remove_expenses(expenseList,cmd,params,history):
             if expenseList == history[len(history)-1]:
                 history.pop()
                 raise ValueError("There were no expenses to remove")
-        elif is_integer(params[0]):
+        elif is_integer(params[0]) and validate_day(int(params[0])):
             history.append(expenseList.copy())
             remove_expenses_from_day(expenseList,int(params[0]))
             if expenseList == history[len(history)-1]:

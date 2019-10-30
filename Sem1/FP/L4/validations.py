@@ -28,6 +28,14 @@ def in_interval(x,start,end):
     return x >= start and x <= end
 
 def validate_day(day):
+    '''
+    Check if the given day is a valid day for the current mounth
+    params:
+        day - the day
+    output:
+        True - day is a valid day
+        False - otherwise
+    '''
     today = datetime.datetime.now()
     return day > 0 and day <= calendar.monthrange(today.year, today.month)[1]
 
