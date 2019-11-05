@@ -1,6 +1,6 @@
 from service import Service
 class UI:
-    # Can th UI do its job withou Service 
+    # Can the UI do its job without Service? 
     # no, it does not make sense to create a UI without having a Service
      
     def __init__(self,service):
