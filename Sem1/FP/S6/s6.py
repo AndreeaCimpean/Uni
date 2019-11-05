@@ -1,7 +1,7 @@
 from game import *
 '''
 Bulls and cows
-This is a game played by the human player abd the computer as it follows:
+This is a game played by the human player and the computer as it follows:
 1. The computer selects a random 4-digits number, which has no repeating digits (e.g. 1234, 9508, 6789 are all okay)
 2. The player tries to guess the number
 3. Each turn, the player enters a 4-digit guess
@@ -12,8 +12,8 @@ This is a game played by the human player abd the computer as it follows:
 UPDATE:
     - computer picks a word withou repeeted letters (isogram) (from memory, or better from an input file)
     - At new game, computer tells th user the word's length
-    - Trying the same word twice loses th game :(
-    - The result of the rules still apply 
+    - Trying the same word twice loses the game :(
+    - The result of the rules still apply
 '''
 
 '''
@@ -38,7 +38,7 @@ class UI:
             - Start new game:
                 - Read user guess
                 - self._game determines if repeated guess - lose
-                - self._game determines
+                - self._game determines #bulls and #cows returned to the UI
             - Exit
         2. Once the game is over, print 
         '''
@@ -47,16 +47,15 @@ class UI:
             command = input("> ")
             if command == "1":
                 self._game.newGame()
-                userGuess = input("Your guess > ")
+                userGuess = int(input("Your guess > "))
                 while not self._game.isVictory(userGuess):
                     try:
                         d = self._game.guess(userGuess)
-                        cows = self._game.guess(userGuess)['cows']
-                        bulls = self._game.guess(userGuess)['bulls']
+                        cows = d['cows']
+                        bulls = d['bulls']
                         print(str(cows) + ' cows')
                         print(str(bulls) + ' bulls')
-                        print(self._game._history)
-                        userGuess = input("Your guess > ")
+                        userGuess = int(input("Your guess > "))
                         
                     except GameException as ge:
                         print(ge)

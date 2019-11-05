@@ -8,6 +8,9 @@ class GameException(Exception):
         super().__init__(message)
 
 class Game:
+    def __init__(self):
+        pass
+
     def _generateNumber(self):
         '''
         Generate a valid number
@@ -23,6 +26,7 @@ class Game:
         while d == a or d == b or d == c:
             d = random.randint(0,9)
         number = a*1000 + b*100 + c*10 + d
+        print (number)
         return number
 
     def newGame(self):
@@ -40,11 +44,11 @@ class Game:
     
     def guess(self,userGuess):
 
-        if userGuess in self._history:
+        if int(userGuess) in self._history:
             raise GameException("Repeated Guess")
         self._history.append(int(userGuess))
-        lstUser = [int(userGuess)%10, int(userGuess)%100/10, int(userGuess)%1000/10, int(userGuess)%1000]
-        lstComputer = [self._number%10, self._number%100/10, self._number%1000/10, self._number%1000]
+        lstUser = [int(userGuess)%10, int(userGuess)%100//10, int(userGuess)%1000//100, int(userGuess)//1000]
+        lstComputer = [self._number%10, self._number%100//10, self._number%1000//100, self._number//1000]
         cows = 0
         bulls = 0
 
@@ -53,13 +57,13 @@ class Game:
                 bulls += 1
         
         for i in range(0,4):
-            if lstUser[i] in lstComputer:
+            if lstUser[i] in lstComputer and lstUser[i] != lstComputer[i]:
                 cows += 1
         
         return {"bulls":bulls,"cows":cows}
 
 
-g = Game()
+'''g = Game()
 g.newGame()
 g.guess(1111)
 try:
@@ -67,7 +71,7 @@ try:
 except GameException:
     print("nay")
 
-
+'''
 
 '''
 
