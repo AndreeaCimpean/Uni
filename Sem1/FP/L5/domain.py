@@ -33,7 +33,9 @@ class Book:
     
 
 def test_book():
-    b = Book('1234','Andreea','Cartea mea')
-    assert b.Isbn == '1234' and b.Author == 'Andreea' and b.Title == 'Cartea mea'
+    b = Book('1234','Andreea','My Book')
+    assert b.Isbn == '1234' and b.Author == 'Andreea' and b.Title == 'My Book'
+    b = Book('1j34','Mary Jean','Fly')
+    assert b.Isbn == '1j34' and b.Author == 'Mary Jean' and b.Title == 'Fly'
 
 test_book()

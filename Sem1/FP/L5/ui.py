@@ -1,5 +1,6 @@
 from services import Service
 from domain import Book
+
 class UI:
     def __init__(self,service):
         self._service = service
@@ -8,9 +9,9 @@ class UI:
         print(" ")
         print("   1  to add a new book")
         print("   2  to show all books")
-        print("   x  to exit")
         print("   3  filter books")
-        print("   u to undo the last operation")
+        print("   u  to undo the last operation")
+        print("   x  to exit")
 
     def start(self):
         while True:
@@ -39,10 +40,13 @@ class UI:
         print(" ")
 
     def add_book(self):
-        isbn = input("isbn= ")
-        author = input("author= ")
-        title = input("title= ")
-        self._service.addBook(Book(isbn,author,title))
+        try:
+            isbn = input("isbn= ")
+            author = input("author= ")
+            title = input("title= ")
+            self._service.addBook(Book(isbn,author,title))
+        except ValueError as ve:
+            print(ve)
     
     def filter_books(self):
         try:
@@ -57,7 +61,5 @@ class UI:
         except ValueError as ve:
             print(ve)
 
-s = Service()
-ui = UI(s)
-ui.start()
+
     
