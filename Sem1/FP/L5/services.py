@@ -19,13 +19,13 @@ class Service:
             the book generated (as an object of type Book)
         '''
         author = names.get_full_name()
-        dictionary = {"first":["The", "Crazy","Red","Good"],"second":["Bold","Cute","Old","Stylish"],"third":["Grandma","Tomato","Hedgehog","Book"]}
+        dictionary = {"first":["The", "Crazy","Red","Good","Bad"],"second":["Bold","Cute","Old","Stylish","Cool"],"third":["Grandma","Tomato","Hedgehog","Book","Potato"]}
         title = ""
-        title += dictionary["first"][random.randint(0,3)]
+        title += dictionary["first"][random.randint(0,4)]
         title += " "
-        title += dictionary["second"][random.randint(0,3)]
+        title += dictionary["second"][random.randint(0,4)]
         title += " "
-        title += dictionary["third"][random.randint(0,3)]
+        title += dictionary["third"][random.randint(0,4)]
         isbn = chr(random.randint(97,122)) + str(random.randint(10000,99999))
         return Book(isbn,author,title)
     
