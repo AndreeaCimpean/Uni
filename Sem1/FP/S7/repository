@@ -1,0 +1,28 @@
+'''
+Write a CLientREpository class:
+    - it keeps a list of clients (private)
+    - function to add a new client (raise exception if client with same ID already in repo)
+    - function that returns all clients
+'''
+
+import copy
+
+class ClientRepository:
+    def __init__(self):
+        self._data = []
+
+    def store(self,client):
+        pass
+
+    def getAll(self):
+        # Returns a reference to the live list
+        return self._data
+        # Maybe a copy here for safety?
+        return self._data[:]
+        # even safer
+        return copy.deepcopy(self._dat)
+
+    def delete(self,clientId):
+        pass
+    def find(self,clientId):
+        pass
