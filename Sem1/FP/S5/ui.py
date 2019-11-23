@@ -13,13 +13,14 @@ class UI:
 
         newStar = None
         self._service.addStar(newStar)
-        pass
+
     def sortStar(self):
         pass
     def start(self):
         # print menu, read user choice, bla, bla ,bla
         # call addStar and sortStars methods
         print('Welcome to star catalogue')
+        self.addStar()
 
 s = Service()
 ui = UI(s)

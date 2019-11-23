@@ -17,7 +17,11 @@ class Service:
             star-...
         raise ValueError if new star too close existing ones
         '''
-        pass
+        for s in self._stars:
+            if s.Location - star.Location < 1:
+                raise ValueError("Stars too close!")
+        self._stars.append (star)
+        
     def sortStars(self,cmp):
         '''
         sort stars by given param
