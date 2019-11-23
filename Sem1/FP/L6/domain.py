@@ -1,7 +1,31 @@
+class MovieException(Exception):
+
+    def __init__(self, message):
+        super().__init__(message)
+
+
+class ClientException(Exception):
+
+    def __init__(self, message):
+        super().__init__(message)
+
+
+class RentalException(Exception):
+
+    def __init__(self, message):
+        super().__init__(message)
+
+
 class Movie:
     def __init__(self, mid, title, description, genre):
         if len(mid) == 0:
-            raise ValueError("Id must not be empty")
+            raise MovieException("Id must not be empty")
+        if len(title) == 0:
+            raise MovieException("Title must not be empty")
+        if len(description) == 0:
+            raise MovieException("Description must not be empty")
+        if len(genre) == 0:
+            raise MovieException("Genre must not be empty")
         self._movieId = mid
         self.Title = title
         self.Description = description
@@ -32,7 +56,7 @@ class Movie:
         return self._genre
 
     @Genre.setter
-    def Genre(self,genre):
+    def Genre(self, genre):
         self._genre = genre
 
     def __str__(self):
@@ -45,7 +69,9 @@ class Movie:
 class Client:
     def __init__(self, cid, name):
         if len(cid) == 0:
-            raise ValueError("Id must not be empty")
+            raise ClientException("Id must not be empty")
+        if len(name) == 0:
+            raise ClientException("Name must not be empty")
         self._clientId = cid
         self.Name = name
 
@@ -68,7 +94,11 @@ class Client:
 class Rental:
     def __init__(self, rid, mid, cid, rented, due, returned):
         if len(rid) == 0:
-            raise ValueError("Id must not be empty")
+            raise RentalException("Id must not be empty")
+        if len(cid) == 0:
+            raise RentalException("Client Id must not be empty")
+        if len(mid) == 0:
+            raise RentalException("Movie Id must not be empty")
         self._rentalId = rid
         self._movieId = mid
         self._clientId = cid

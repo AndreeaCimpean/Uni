@@ -1,6 +1,7 @@
 from services import *
 from datetime import date, timedelta
 
+
 from ui import *
 from domain import *
 import random
@@ -8,15 +9,17 @@ import names
 
 
 def generate_client():
-    clientId = "C" + str(random.randint(100,999))
+    clientId = "C" + str(random.randint(100, 999))
     name = names.get_full_name()
     return Client(clientId, name)
 
 
 def generate_movie():
-    descriptions = ["Blockbuster for 4 weeks", "A beautiful story", "Think about it"]
+    descriptions = ["Blockbuster for 4 weeks", "A beautiful story", "Think about it", "New"]
     genres = ["horror", "drama", "comedy", "romance"]
-    titles = {"first": ["The", "Good", "Gorgeous"], "second": ["Last", "Bad", "Final"], "third": ["Movie", "Chapter", "Grandma"]}
+    titles = {"first": ["The", "Good", "Gorgeous"],
+              "second": ["Last", "Bad", "Final"],
+              "third": ["Movie", "Chapter", "Grandma"]}
 
     movieId = "M" + str(random.randint(100, 999))
     title = titles["first"][random.randint(0, 2)]
@@ -24,8 +27,8 @@ def generate_movie():
     title += titles["second"][random.randint(0, 2)]
     title += " "
     title += titles["third"][random.randint(0, 2)]
-    description = descriptions[random.randint(0,2)]
-    genre = genres[random.randint(0,3)]
+    description = descriptions[random.randint(0, 3)]
+    genre = genres[random.randint(0, 3)]
     return Movie(movieId, title, description, genre)
 
 
