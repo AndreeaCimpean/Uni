@@ -47,28 +47,32 @@ class MovieService:
     def search_movie_by_id(self, movieId):
         movies = []
         for m in self.get_movies():
-            if fuzz.partial_ratio(movieId, m.movieId.lower()) > 50:
+            #if fuzz.partial_ratio(movieId, m.movieId.lower()) > 50:
+            if movieId in m.movieId.lower():
                 movies.append(m)
         return movies
 
     def search_movie_by_title(self, title):
         movies = []
         for m in self.get_movies():
-            if fuzz.partial_ratio(title, m.Title.lower()) > 50:
+            #if fuzz.partial_ratio(title, m.Title.lower()) > 50:
+            if title in m.Title.lower():
                 movies.append(m)
         return movies
 
     def search_movie_by_description(self, description):
         movies = []
         for m in self.get_movies():
-            if fuzz.partial_ratio(description, m.Description.lower()) > 50:
+            #if fuzz.partial_ratio(description, m.Description.lower()) > 50:
+             if description in m.Description.lower():
                 movies.append(m)
         return movies
 
     def search_movie_by_genre(self, genre):
         movies = []
         for m in self.get_movies():
-            if fuzz.partial_ratio(genre, m.Genre.lower()) > 50:
+            #if fuzz.partial_ratio(genre, m.Genre.lower()) > 50:
+             if genre in m.Genre.lower():
                 movies.append(m)
         return movies
 
@@ -114,21 +118,59 @@ class ClientService:
     def search_client_by_id(self, clientId):
         clients = []
         for c in self.get_clients():
-            if fuzz.partial_ratio(clientId, c.clientId.lower()) > 50:
+            #if fuzz.partial_ratio(clientId, c.clientId.lower()) > 50:
+             if clientId in c.clientId.lower():
                 clients.append(c)
         return clients
 
     def search_client_by_name(self, name):
         clients = []
         for c in self.get_clients():
-            if fuzz.partial_ratio(name, c.Name.lower()) > 70:
+            #if fuzz.partial_ratio(name, c.Name.lower()) > 70:
+             if name in c.Name.lower():
                 clients.append(c)
         return clients
 
 
+class MovieDays:
+    def __init__(self, movie, days):
+        self._movie = movie
+        self._days = days
+
+    @property
+    def Movie(self):
+        return self._movie
+
+    @property
+    def Days(self):
+        return self._days
+
+    def __str__(self):
+        return str(self.Days) + " days - " + str(self.Movie)
+
+
+class ClientRentalDays:
+    def __init__(self, client, days):
+        self._client = client
+        self._days = days
+
+    @property
+    def Client(self):
+        return self._client
+
+    @property
+    def Days(self):
+        return self._days
+
+    def __str__(self):
+        return str(self.Days) + " days - " + str(self.Client)
+
+
 class RentalService:
-    def __init__(self, rentalRepo):
+    def __init__(self, rentalRepo, movieRepo, clientRepo):
         self._rentalRepository = rentalRepo
+        self._movieRepository = movieRepo
+        self._clientRepository = clientRepo
 
     def get_rentals(self):
         return self._rentalRepository.get_list_rentals()
@@ -190,3 +232,60 @@ class RentalService:
                 self._rentalRepository.delete_rental(self.get_rentals()[i].rentalId)
             else:
                 i += 1
+
+    def most_rented_movies(self):
+        d = dict()
+        for i in range(len(self.get_rentals())):
+            rent = self.get_rentals()[i]
+            if rent.movieId not in d.keys():
+                d[rent.movieId] = len(rent)
+            else:
+                d[rent.movieId] += len(rent)
+
+        result = []
+        for i in range(len(self._movieRepository.get_list_movies())):
+            movie = self._movieRepository.get_list_movies()[i]
+            try:
+                result.append(MovieDays(movie, d[movie.movieId]))
+            except KeyError:
+                result.append(MovieDays(movie, 0))
+        result.sort(key=lambda x: x.Days, reverse=True)
+        return result
+
+    def most_active_clients(self):
+        d = dict()
+        for i in range(len(self.get_rentals())):
+            rent = self.get_rentals()[i]
+            if rent.clientId not in d.keys():
+                d[rent.clientId] = len(rent)
+            else:
+                d[rent.clientId] += len(rent)
+
+        result = []
+        for i in range(len(self._clientRepository.get_list_clients())):
+            client = self._clientRepository.get_list_clients()[i]
+            try:
+                result.append(ClientRentalDays(client, d[client.clientId]))
+            except KeyError:
+                result.append(ClientRentalDays(client, 0))
+        result.sort(key=lambda x: x.Days, reverse=True)
+        return result
+
+    def late_rentals(self):
+        d = dict()
+        for i in range(len(self.get_rentals())):
+            rent = self.get_rentals()[i]
+            if rent.is_late():
+                if rent.movieId not in d.keys():
+                    d[rent.movieId] = rent.delay_days()
+                else:
+                    d[rent.movieId] += rent.delay_days()
+
+        result = []
+        for i in range(len(self._movieRepository.get_list_movies())):
+            movie = self._movieRepository.get_list_movies()[i]
+            if movie.movieId in d.keys():
+                result.append(MovieDays(movie, d[movie.movieId]))
+
+        result.sort(key=lambda x: x.Days, reverse=True)
+        return result

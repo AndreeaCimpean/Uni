@@ -9,19 +9,16 @@ class UI:
 
     def _print_menu(self):
         print(" ")
-        print("    1  to show all the movies")
-        print("    2  to show all the clients")
-        print("    3  to show all rentals")
-        print("    4  to add a new movie")
-        print("    5  to add a new client")
-        print("    6  to delete a movie")
-        print("    7  to delete a client")
-        print("    8  to update a movie")
-        print("    9  to update a client")
-        print("    10 to rent a movie")
-        print("    11 to return a movie")
-        print("    12 to search a movie")
-        print("    13 to search a client")
+        print("MENU")
+        print(" ")
+        print("    1  to show all the movies        9  to update a client")
+        print("    2  to show all the clients       10 to rent a movie")
+        print("    3  to show all rentals           11 to return a movie")
+        print("    4  to add a new movie            12 to search a movie")
+        print("    5  to add a new client           13 to search a client")
+        print("    6  to delete a movie             14 to show most rented movies")
+        print("    7  to delete a client            15 to show most active clients")
+        print("    8  to update a movie             16 to show late rentals")
         print("    x  to exit")
 
     def start(self):
@@ -54,6 +51,12 @@ class UI:
                 self.search_movie_ui()
             elif command == "13":
                 self.search_client_ui()
+            elif command == "14":
+                self._most_rented_movies_ui()
+            elif command == "15":
+                self._most_active_clients_ui()
+            elif command == "16":
+                self._late_rentals_ui()
             elif command == "x":
                 return
             else:
@@ -65,6 +68,7 @@ class UI:
         print(" ")
         for m in self._movieService.get_movies():
             print(m)
+        print("-"*100)
 
     def _show_all_clients(self):
         print(" ")
@@ -72,6 +76,7 @@ class UI:
         print(" ")
         for c in self._clientService.get_clients():
             print(c)
+        print("-"*40)
 
     def _show_all_rentals(self):
         print(" ")
@@ -79,6 +84,7 @@ class UI:
         print(" ")
         for r in self._rentalService.get_rentals():
             print(r)
+        print("-"*105)
 
     def _add_movie_ui(self):
         movieId = input("movie id = ")
@@ -208,3 +214,18 @@ class UI:
                 print(c)
         else:
             print("No clients found")
+
+    def _most_rented_movies_ui(self):
+        result = self._rentalService.most_rented_movies()
+        for r in result:
+            print(r)
+
+    def _most_active_clients_ui(self):
+        result = self._rentalService.most_active_clients()
+        for r in result:
+            print(r)
+
+    def _late_rentals_ui(self):
+        result = self._rentalService.late_rentals()
+        for r in result:
+            print(r)

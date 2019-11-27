@@ -1,3 +1,5 @@
+from datetime import date
+
 class MovieException(Exception):
 
     def __init__(self, message):
@@ -99,6 +101,11 @@ class Rental:
             raise RentalException("Client Id must not be empty")
         if len(mid) == 0:
             raise RentalException("Movie Id must not be empty")
+        if due < rented:
+            raise RentalException("Due date must be after rent date")
+        if returned != None:
+            if returned < rented:
+                raise RentalException("Returned date must be after rent date")
         self._rentalId = rid
         self._movieId = mid
         self._clientId = cid
@@ -141,3 +148,18 @@ class Rental:
                ", rentedDate: " + str(self._rentedDate) + \
                ", dueDate: " + str(self._dueDate) + \
                ", returnedDate: " + str(self.returnedDate)
+    
+    def __len__(self):
+        if self._returnedDate != None:
+            return int((self._returnedDate - self._rentedDate).days) + 1
+        else:
+            return int((date.today() - self.rentedDate).days) + 1
+
+    def delay_days(self):
+        if self.is_late():
+            return int((date.today() - self.dueDate).days)
+        return 0
+
+    def is_late(self):
+        return self.returnedDate == None and self.dueDate < date.today()
+
