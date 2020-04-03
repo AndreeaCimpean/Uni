@@ -1,0 +1,5 @@
+103,Tudor Mihai,13,9
+104,Pop Maria,5,8
+105,Pop Ana,6,9
+106,Avram Anca,3,8
+107,Muntean Florina,8,8

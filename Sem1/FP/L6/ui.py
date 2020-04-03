@@ -2,10 +2,11 @@ from services import *
 
 
 class UI:
-    def __init__(self, movieServ, clientServ, rentalServ):
+    def __init__(self, movieServ, clientServ, rentalServ, undoServ):
         self._movieService = movieServ
         self._clientService = clientServ
         self._rentalService = rentalServ
+        self._undoService = undoServ
 
     def _print_menu(self):
         print(" ")
@@ -19,6 +20,9 @@ class UI:
         print("    6  to delete a movie             14 to show most rented movies")
         print("    7  to delete a client            15 to show most active clients")
         print("    8  to update a movie             16 to show late rentals")
+        print(" ")
+        print("    u  to undo")
+        print("    r  to redo")
         print("    x  to exit")
 
     def start(self):
@@ -57,6 +61,10 @@ class UI:
                 self._most_active_clients_ui()
             elif command == "16":
                 self._late_rentals_ui()
+            elif command == "u":
+                self._undo_ui()
+            elif command == "r":
+                self._redo_ui()
             elif command == "x":
                 return
             else:
@@ -92,38 +100,34 @@ class UI:
         description = input("description: ")
         genre = input("genre = ")
         try:
-            movie = Movie(movieId, title, description, genre)
-            self._movieService.add_movie(movie)
-        except MovieException as ve:
-            print(ve)
+           self._movieService.add_movie(movieId, title, description, genre)
+        except Exception as e:
+            print(e)
 
     def _add_client_ui(self):
         clientId = input("client id = ")
         name = input("name = ")
         try:
-            client = Client(clientId, name)
-            self._clientService.add_client(client)
-        except ClientException as ve:
-            print(ve)
+            self._clientService.add_client(clientId, name)
+        except Exception as e:
+            print(e)
 
     def _remove_movie_ui(self):
         movieId = input("movie id = ")
         try:
             self._movieService.remove_movie(movieId)
-            self._rentalService.delete_all_rentals_movie(movieId)
-        except MovieException as ve:
-            print(ve)
+        except Exception as e:
+            print(e)
 
     def _remove_client_ui(self):
         clientId = input("client id = ")
         try:
             self._clientService.remove_client(clientId)
-            self._rentalService.delete_all_rentals_client(clientId)
-        except ClientException as ve:
-            print(ve)
+        except Exception as e:
+            print(e)
 
     def _update_movie_ui(self):
-        movieId = input("new movie id = ")
+        movieId = input("movie id = ")
         title = input("new title = ")
         description = input("new description: ")
         genre = input("new genre = ")
@@ -150,9 +154,10 @@ class UI:
             print("No such client")
             return
         try:
-            self._rentalService.rent_movie(clientId, movieId)
-        except RentalException as ve:
-            print(ve)
+            self._rentalService.generate_rental(clientId, movieId)
+        except Exception as e:
+            print(e)
+
 
     def _return_movie_ui(self):
         clientId = input("client id = ")
@@ -229,3 +234,15 @@ class UI:
         result = self._rentalService.late_rentals()
         for r in result:
             print(r)
+
+    def _undo_ui(self):
+        try:
+            self._undoService.undo()
+        except Exception as e:
+            print(e)
+
+    def _redo_ui(self):
+        try:
+            self._undoService.redo()
+        except Exception as e:
+            print(e)

@@ -1,12 +1,17 @@
+
 from repositories import *
 from datetime import date, timedelta
+from undoservice import *
 import random
 from fuzzywuzzy import fuzz
 
 
 class MovieService:
-    def __init__(self, movieRepo):
+    def __init__(self, movieRepo, validator, undoService, rentalService):
+        self.__validator = validator
         self._movieRepository = movieRepo
+        self._rentalService = rentalService
+        self._undoService = undoService
 
     def get_movies(self):
         return self._movieRepository.get_list_movies()
@@ -17,21 +22,49 @@ class MovieService:
             moviesids.append(m.movieId)
         return moviesids
 
-    def add_movie(self, movie):
+    def add_movie(self, movieId, title, description, genre):
         '''
         Call repository function to add a new movie to the list
         params:
             movie - the movie
         '''
+        movie = Movie(movieId, title, description, genre)
+        self.__validator.validate(movie)
         self._movieRepository.store_movie(movie)
 
-    def remove_movie(self, movieId):
+        redo = FunctionCall(self.add_movie, movieId, title, description, genre)
+        undo = FunctionCall(self.remove_movie, movieId)
+        op = Operation(undo, redo)
+        self._undoService.recordOperation(op)
+
+    def remove_movie(self, movieId, inUndoRedo=False):
         '''
         Call repository function to remove a movie from the list
         params:
             movieId - the id of the movie
         '''
-        self._movieRepository.delete_movie(movieId)
+
+        movie = self._movieRepository.delete_movie(movieId)
+
+        undo = FunctionCall(self.add_movie, movieId, movie.Title, movie.Description, movie.Genre)
+        redo = FunctionCall(self.remove_movie, movieId, True)
+        op = Operation(undo, redo)
+        listOp = []
+        listOp.append(op)
+
+        rentals = self._rentalService.find_movie_rentals(movieId)
+        for rent in rentals:
+            undo = FunctionCall(self._rentalService.create_rental, rent.rentalId, rent.movieId, rent.clientId, rent.rentedDate, rent.dueDate, rent.returnedDate, False)
+            redo = FunctionCall(self._rentalService.delete_rental, rent.rentalId, False)
+            op = Operation(undo, redo)
+            listOp.append(op)
+
+        cascadeOp = CascadeOperation(listOp)
+        self._undoService.recordOperation(cascadeOp)
+
+        if inUndoRedo == False:
+            for rent in rentals:
+                self._rentalService.delete_rental(rent.rentalId, False)
 
     def update_movie(self, movieId, title, description, genre):
         '''
@@ -42,7 +75,18 @@ class MovieService:
             description - the new description
             genre - the new genre
         '''
-        self._movieRepository.update_movie(movieId, title, description, genre)
+        movieBefore = self._movieRepository.find_by_id(movieId)
+        if movieBefore == None:
+            raise MovieException("No such movie")
+        oldTitle = movieBefore.Title
+        oldDescription = movieBefore.Description
+        oldGenre = movieBefore.Genre
+        movieAfter = self._movieRepository.update_movie(movieId, title, description, genre)
+
+        undo = FunctionCall(self.update_movie, movieId, oldTitle, oldDescription, oldGenre)
+        redo = FunctionCall(self.update_movie, movieId, movieAfter.Title, movieAfter.Description, movieAfter.Genre)
+        op = Operation(undo, redo)
+        self._undoService.recordOperation(op)
 
     def search_movie_by_id(self, movieId):
         movies = []
@@ -78,8 +122,11 @@ class MovieService:
 
 
 class ClientService:
-    def __init__(self, clientRepo):
+    def __init__(self, clientRepo, validator, rentalService, undoService):
         self._clientRepository = clientRepo
+        self.__validator = validator
+        self._rentalService = rentalService
+        self._undoService = undoService
 
     def get_clients(self):
         return self._clientRepository.get_list_clients()
@@ -90,21 +137,49 @@ class ClientService:
             clientsids.append(c.clientId)
         return clientsids
 
-    def add_client(self, client):
+    def add_client(self, clientId, name):
         '''
         Call repository function to add a new client to the list
         params:
             client - the client
         '''
+        client = Client(clientId, name)
+        self.__validator.validate(client)
         self._clientRepository.store_client(client)
 
-    def remove_client(self, clientId):
+        redo = FunctionCall(self.add_client, clientId, name)
+        undo = FunctionCall(self.remove_client, clientId)
+        op = Operation(undo, redo)
+        self._undoService.recordOperation(op)
+
+    def remove_client(self, clientId, inUndoRedo=False):
         '''
         Call repository function to remove a client from the list
         params:
             clientId - the id of the client
         '''
-        self._clientRepository.delete_client(clientId)
+        client = self._clientRepository.delete_client(clientId)
+
+        undo = FunctionCall(self.add_client, clientId, client.Name)
+        redo = FunctionCall(self.remove_client, clientId, True)
+        op = Operation(undo, redo)
+        listOp = []
+        listOp.append(op)
+
+        rentals = self._rentalService.find_client_rentals(clientId)
+        for rent in rentals:
+            undo = FunctionCall(self._rentalService.create_rental, rent.rentalId, rent.movieId, rent.clientId,
+                                rent.rentedDate, rent.dueDate, rent.returnedDate, False)
+            redo = FunctionCall(self._rentalService.delete_rental, rent.rentalId, False)
+            op = Operation(undo, redo)
+            listOp.append(op)
+
+        cascadeOp = CascadeOperation(listOp)
+        self._undoService.recordOperation(cascadeOp)
+
+        if inUndoRedo == False:
+            for rent in rentals:
+                self._rentalService.delete_rental(rent.rentalId, False)
 
     def update_client(self, clientId, name):
         '''
@@ -113,7 +188,15 @@ class ClientService:
             clientId - the id of the client
             name - the new name
         '''
-        self._clientRepository.update_client(clientId, name)
+        clientBefore = self._clientRepository.find_by_id(clientId)
+        if clientBefore == None:
+            raise ClientException("No such client")
+        oldName = clientBefore.Name
+        clientAfter = self._clientRepository.update_client(clientId, name)
+        undo = FunctionCall(self.update_client, clientId, oldName)
+        redo = FunctionCall(self.update_client, clientId, clientAfter.Name)
+        op = Operation(undo, redo)
+        self._undoService.recordOperation(op)
 
     def search_client_by_id(self, clientId):
         clients = []
@@ -167,33 +250,62 @@ class ClientRentalDays:
 
 
 class RentalService:
-    def __init__(self, rentalRepo, movieRepo, clientRepo):
+    def __init__(self, rentalRepo, movieRepo, clientRepo, validator, undoService):
         self._rentalRepository = rentalRepo
         self._movieRepository = movieRepo
         self._clientRepository = clientRepo
+        self.__validator = validator
+        self._undoService = undoService
 
     def get_rentals(self):
         return self._rentalRepository.get_list_rentals()
 
-    def rent_movie(self, clientId, movieId):
+    def find_movie_rentals(self, movieId):
+        rentals = []
+        for r in self.get_rentals():
+            if r.movieId == movieId:
+                rentals.append(r)
+        return rentals
+
+    def find_client_rentals(self, clientId):
+        rentals = []
+        for r in self.get_rentals():
+            if r.clientId == clientId:
+                rentals.append(r)
+        return rentals
+
+    def create_rental(self, rentalId, movieId, clientId, rented, due, returned, recordUndo=True):
+        rental = Rental(rentalId, movieId, clientId, rented, due, returned)
+        self.__validator.validate(rental)
+        self._rentalRepository.store_rental(rental)
+
+        if recordUndo == True:
+            redo = FunctionCall(self.create_rental, rentalId, movieId, clientId, rented, due, returned)
+            undo = FunctionCall(self.delete_rental, rentalId)
+            op = Operation(undo, redo)
+            self._undoService.recordOperation(op)
+
+    def delete_rental(self, rentalId, recordUndo=True):
+        rental = self._rentalRepository.delete_rental(rentalId)
+        if recordUndo == True:
+            redo = FunctionCall(self.delete_rental, rentalId)
+            undo = FunctionCall(self.create_rental, rentalId, rental.movieId, rental.clientId, rental.rentedDate, rental.dueDate, rental.returnedDate)
+            op = Operation(undo, redo)
+            self._undoService.recordOperation(op)
+
+    def generate_rental(self, clientId, movieId):
         if not self.is_movie_available(movieId):
             raise RentalException("Movie is not available")
         if not self.can_rent(clientId):
             raise RentalException("Can not rent because due date for a movie passed, and still not returned")
-        while True:
-            try:
-                rental = self.generate_rental(clientId, movieId)
-                self._rentalRepository.store_rental(rental)
-                break
-            except RentalException:
-                pass
-
-    def generate_rental(self, clientId, movieId):
-        rentalId = "R" + str(random.randint(100, 999))
+        rentalId= "R" + str(random.randint(100, 999))
+        while self._rentalRepository.find_by_id(rentalId) != None:
+            rentalId= "R" + str(random.randint(100, 999))
         rentedDate = date.today()
         dueDate = rentedDate + timedelta(days=14)
         returnedDate = None
-        return Rental(rentalId, movieId, clientId, rentedDate, dueDate, returnedDate)
+        self.create_rental(rentalId, movieId, clientId, rentedDate, dueDate, returnedDate)
+
 
     def is_movie_available(self, movieId):
         for r in self.get_rentals():
@@ -210,28 +322,16 @@ class RentalService:
     def return_movie(self, clientId, movieId):
         rentalId = self.find_rental_by_movie_and_client(clientId, movieId)
         self._rentalRepository.update_rental(rentalId, date.today())
+        undo = FunctionCall(self._rentalRepository.update_rental, rentalId, None)
+        redo = FunctionCall(self.return_movie, clientId, movieId)
+        op = Operation(undo, redo)
+        self._undoService.recordOperation(op)
 
     def find_rental_by_movie_and_client(self, clientId, movieId):
         for r in self.get_rentals():
             if r.movieId == movieId and r.clientId == clientId and r.returnedDate == None:
                 return r.rentalId
         return None
-
-    def delete_all_rentals_client(self, clientId):
-        i = 0
-        while i < len(self.get_rentals()):
-            if self.get_rentals()[i].clientId == clientId:
-                self._rentalRepository.delete_rental(self.get_rentals()[i].rentalId)
-            else:
-                i += 1
-
-    def delete_all_rentals_movie(self, movieId):
-        i = 0
-        while i < len(self.get_rentals()):
-            if self.get_rentals()[i].movieId == movieId:
-                self._rentalRepository.delete_rental(self.get_rentals()[i].rentalId)
-            else:
-                i += 1
 
     def most_rented_movies(self):
         d = dict()

@@ -1,0 +1,10 @@
+M152,Gorgeous Bad Movie,Think about it,comedy
+M183,The Final Movie,A beautiful story,comedy
+M272,Gorgeous Final Movie,New,romance
+M325,Good Bad Movie,A beautiful story,horror
+M732,Gorgeous Bad Grandma,Think about it,drama
+M562,The Good Grandma,Think about it,romance
+M160,Good Last Movie,A beautiful story,comedy
+M746,The Bad Chapter,Blockbuster for 4 weeks,romance
+M722,The Bad Chapter,A beautiful story,drama
+M320,Good Bad Grandma,A beautiful story,horror

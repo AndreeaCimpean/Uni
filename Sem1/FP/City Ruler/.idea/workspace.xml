@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="147330fd-58ec-4673-bed6-5946f299dd69" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Andromeda Strain/domain.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Andromeda Strain/repository.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../L10/board.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../L10/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../L11/iterator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../L9/.idea/L9.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../S10/.idea/S10.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../S11/new.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../S13/minesweeper.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../S9/seminar - Copy/.idea/seminar.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../S9/seminar/.idea/seminar.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../S9/seminar07/.idea/seminar07.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../L6/domain.py" beforeDir="false" afterPath="$PROJECT_DIR$/../L6/domain.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../L6/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../L6/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../L6/repositories.py" beforeDir="false" afterPath="$PROJECT_DIR$/../L6/repositories.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../L6/service.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../L6/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/../L6/services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../L6/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/../L6/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../L6/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/../L6/ui.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectId" id="1X6ZXkieh6K6WbxHkXcHIfxZi0Z" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="147330fd-58ec-4673-bed6-5946f299dd69" name="Default Changelist" comment="" />
+      <created>1580368546302</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1580368546302</updated>
+      <workItem from="1580368547686" duration="216000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

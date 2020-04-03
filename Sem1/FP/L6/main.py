@@ -1,11 +1,12 @@
 from services import *
 from datetime import date, timedelta
-
+from validators import *
 
 from ui import *
 from domain import *
 import random
 import names
+from undoservice import *
 
 
 def generate_client():
@@ -129,15 +130,26 @@ def generate_list_of_rentals(movies, clients):
     return rentals
 
 
-clients = generate_list_of_clients()
-movies = generate_list_of_movies()
-rentals = generate_list_of_rentals(movies, clients)
+def start_program():
+    clients = generate_list_of_clients()
+    movies = generate_list_of_movies()
+    rentals = generate_list_of_rentals(movies, clients)
 
-movieRepo = MovieRepository(movies)
-movieServ = MovieService(movieRepo)
-clientRepo = ClientRepository(clients)
-clientServ = ClientService(clientRepo)
-rentalRepo = RentalRepository(rentals)
-rentalServ = RentalService(rentalRepo, movieRepo, clientRepo)
-ui = UI(movieServ, clientServ, rentalServ)
-ui.start()
+    movieRepo = MovieRepository(movies)
+    clientRepo = ClientRepository(clients)
+    rentalRepo = RentalRepository(rentals)
+
+    movieValidator = MovieValidator()
+    clientValidator = ClientValidator()
+    rentalValidator = RentalValidator()
+
+    undoServ = UndoService()
+
+    rentalServ = RentalService(rentalRepo, movieRepo, clientRepo, rentalValidator, undoServ)
+    movieServ = MovieService(movieRepo, movieValidator, undoServ, rentalServ)
+    clientServ = ClientService(clientRepo, clientValidator, rentalServ, undoServ)
+
+    ui = UI(movieServ, clientServ, rentalServ, undoServ)
+    ui.start()
+
+start_program()

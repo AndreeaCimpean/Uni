@@ -1,0 +1,10 @@
+1, double
+2, single
+3, family
+4, double
+5, family
+6, single
+7, family
+8, double
+9, double
+10, single

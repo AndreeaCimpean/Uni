@@ -1,5 +1,5 @@
 from domain import *
-
+from exceptions import MovieException, ClientException, RentalException
 
 class MovieRepository:
     def __init__(self, movies):
@@ -44,8 +44,9 @@ class MovieRepository:
         '''
         movie = self.find_by_id(movieId)
         if movie == None:
-            raise MovieException("Not such movie")
+            raise MovieException("No such movie")
         self._movies.remove(movie)
+        return movie
 
     def update_movie(self, movieId, title, description, genre):
         '''
@@ -55,18 +56,16 @@ class MovieRepository:
             title - the new title
             description - the new description
             genre - the new genre
-        Update the movie if found
-        Raise an error otherwise
+        Update the movie
         '''
         movie = self.find_by_id(movieId)
-        if movie == None:
-            raise MovieException("Not such movie")
         if len(title) > 0:
             movie.Title = title
         if len(description) > 0:
             movie.Description = description
         if len(genre) > 0:
             movie.Genre = genre
+        return movie
 
 
 class ClientRepository:
@@ -112,8 +111,9 @@ class ClientRepository:
         '''
         client = self.find_by_id(clientId)
         if client == None:
-            raise ClientException("Not such client")
+            raise ClientException("No such client")
         self._clients.remove(client)
+        return client
 
     def update_client(self, clientId, name):
         '''
@@ -121,13 +121,11 @@ class ClientRepository:
         params:
             clientId - the id of the client
             name - the new name
-        Update the client if found
-        Raise an error otherwise
+        Update the client
         '''
         client = self.find_by_id(clientId)
-        if client == None:
-            raise ClientException("Not such client")
         client.Name = name
+        return client
 
 
 class RentalRepository:
@@ -156,4 +154,7 @@ class RentalRepository:
 
     def delete_rental(self, rentalId):
         rental = self.find_by_id(rentalId)
+        if rental == None:
+            raise RentalException("There is no such rental")
         self._rentals.remove(rental)
+        return rental
