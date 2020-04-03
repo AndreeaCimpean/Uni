@@ -1,0 +1,12 @@
+6 Time needed to parse random graphs
+With adjacency matrix: 
+For a graph with 1000 vertices it takes 0.2499396800994873 seconds to create and 0.4686715602874756 seconds to parse
+For a graph with 10000 vertices it takes 25.400258779525757 seconds to create and 53.79975914955139 seconds to parse
+With dictionary: 
+For a graph with 1000 vertices it takes 0.04686403274536133 seconds to create and 0.437396764755249 seconds to parse
+For a graph with 10000 vertices it takes 0.4686412811279297 seconds to create and 50.37873578071594 seconds to parse
+With two dictionaries: 
+For a graph with 1000 vertices it takes 0.04686331748962402 seconds to create and 0.0 seconds to parse
+For a graph with 10000 vertices it takes 0.49985766410827637 seconds to create and 0.015652179718017578 seconds to parse
+For a graph with 100000 vertices it takes 5.123782634735107 seconds to create and 0.23432087898254395 seconds to parse
+For a graph with 1000000 vertices it takes 53.23743391036987 seconds to create and 2.4993832111358643 seconds to parse

@@ -1,0 +1,64 @@
+#pragma once
+#include "domain.h"
+#include "dynamicArray.h"
+#include "operationStack.h"
+#include "repository.h"
+#include "service.h"
+
+void test_all();
+
+void test__create_profile__valid_input__created();
+void test__copy_profile__valid_profile__copy_created();
+void test__get_profile_id__valid_profile__get_id();
+void test__get_years_of_recorded_service__valid_profile__get_years();
+void test__get_place_of_birth__valid_profile__get_place();
+void test__get_psychological_profile__valid_profile__get_psychological_profile();
+
+void test__create_dynamic_array__valid_input__created();
+void test__resize_dynamic_array__valid_array__increased_size();
+void test__add_element_dynamic_array__valid_input_without_resize__added_element();
+void test__add_element_dynamic_array__valid_input_with_resize__added_element();
+void test__delete_element_from_dynamic_array__valid_input__deleted_element();
+void test__get_length_dynamic_array__valid_array__get_length();
+void test__get_element_from_dynamic_array__valid_position__get_element();
+void test__get_element_from_dynamic_array__inavlid_postion__return_null();
+
+
+void test__create_operation__valid_input__created_operation();
+void test__get_operation_type__valid_operation__get_type();
+void test__get_profile_from_operation__valid_operation__get_profile();
+void test__copy_operation__valid_operation__copy_created();
+
+void test__create_operations_stack__created_stack();
+void test__push_to_operations_stack__valid_input__operation_added();
+void test__pop_from_operations_stack__valid_stack__operation_popped();
+void test__operations_stack_is_empty__valid_stack__check();
+
+void test__create_repository__created_repository();
+void test__find_profile_index_by_profile_id__existing_profile__get_index();
+void test__find_profile_index_by_profile_id__non_existing_profile__return_code();
+void test__add_profile_repository__valid_profile__added_profile();
+void test__add_profile_repository__dupliacated_profile__return_code();
+void test__get_all_profiles_repository__valid_repository__get_profiles();
+void test__update_profile_repository__existing_profile__update_profile();
+void test__update_profile_repository__non_existing_profile__return_code();
+void test__delete_profile_repository__existing_profile__deleted_profile();
+void test__delete_profile_repository__non_existing_profile__return_code();
+void test__get_number_of_profiles_repository__valid_repository__get_number();
+void test__get_profile_from_list_of_profiles__valid_input__get_profile();
+
+void test__create_service__valid_input__created_service();
+void test__get_all_profiles_service__valid_service__get_profiles();
+void test__get_profiles_filtered_by_psychological_profile__valid_input__filtered_profiles();
+void test__add_profile_service__valid_profile__added_profile();
+void test__add_profile_service_duplicate_profile__return_code();
+void test__update_profile_service__existing_profile__updated_profile();
+void test__update_profile_service__non_existing_profile__return_code();
+void test__delete_profile_service__existing_profile__deleted_profile();
+void test__delete_profile_service_non_existing_profile__return_code();
+void test__get_newbies__valid_input__get_list_of_newbies();
+void test__get_profile_from_profiles_service__valid_input__get_profile();
+void test__undo__can_undo__undo_last_operation();
+void test__undo__no_more_undos__return_code();
+void test__redo__can_redo__redo_the_last_operation();
+void test__redo__no_more_redos__return_code();

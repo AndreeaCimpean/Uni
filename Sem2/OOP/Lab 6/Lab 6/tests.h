@@ -1,0 +1,35 @@
+#pragma once
+#include "Evidence.h"
+#include "DynamicVector.h"
+#include "Repository.h"
+#include "Service.h"
+#include <assert.h>
+
+void test_equal_evidences__two_equal_evidences__true();
+void test_equal_evidences__two_different_evidences__false();
+
+void test_dynamic_vector_resize__valid_input__increased_capacity();
+void test_dynamic_vector_resize__valid_input__same_elements();
+void test_dynamic_vector_add_element__without_resize__element_added();
+void test_dynamic_vector_add_element__with_resize__element_added();
+void test_dynamic_vector_add_element__valid_element__increased_vector_length();
+void test_dynamic_vector_delete_element__valid_elemnt__elemnet_deleted();
+void test_dynamic_vector_delete_element__valid_element__decreased_vector_length();
+void test_dynamic_vector_get_element__valid_input__get_element();
+void test_dynamic_vector_update_element__valid_input__element_updated();
+
+void test_repository_find_evidence_index_by_id__existing_id__index_found();
+void test_repository_find_evidence_index_by_id__nonexisting_id__return_code();
+void test_repository_add_evidence__valid_evidence__evidence_added();
+void test_repository_add_evidence__duplicate_evidence__throw_exception();
+void test_repository_update_evidence__valid_evidence__evidence_updated();
+void test_repository_update_evidence__nonexisting_evidence__throw_exception();
+void test_repository_delete_evidence__valid_evidence__deleted_evidence();
+void test_repository_delete_evidence__nonexisting_evidence__throw_exception();
+
+void test_service_add_evidence__valid_input__evidence_added();
+void test_service_update_evidence__valid_input__evidence_updated();
+void test_service_delte_evidence__valid_input__deleted_evidence();
+
+void test_all();
+
