@@ -5,6 +5,7 @@
 Map::Map() {
 	//TODO - Implementation
 	this->head = NULL;
+	this->tail = NULL;
 }
 
 Map::~Map() {
@@ -20,10 +21,9 @@ Map::~Map() {
 
 /*
 Complexity:
-BC - Theta(1) key found at the beginning
-AC - Theta(n)
-WC - Theta(n) key not found in map
-Overall complexity - O(n)
+BC - Theta(1) - element is the head
+WC - Theta(n) - element not in the map
+Overall complexity: O(n)
 */
 TValue Map::add(TKey c, TValue v){
 	//TODO - Implementation
@@ -38,30 +38,32 @@ TValue Map::add(TKey c, TValue v){
 		}
 		currentNode = currentNode->next;
 	}
+
 	TElem element = TElem(c, v);
 	Node* new_node = new Node;
 	new_node->data = element;
-	new_node->previous = NULL;
+	new_node->next = NULL;
+	new_node->previous = this->tail;
+
 	if (this->head == NULL)
 	{
-		new_node->next = NULL;
 		this->head = new_node;
+		this->tail = new_node;
 	}
-	else 
+	else
 	{
-		new_node->next = this->head;
-		this->head->previous = new_node;
-		this->head = new_node;
+		this->tail->next = new_node;
+		this->tail = new_node;
 	}
+
 	return NULL_TVALUE;
 }
 
 /*
 Complexity:
-BC - Theta(1) key found at the beginning
-AC - Theta(n)
-WC - Theta(n) key not found in map
-Overall complexity - O(n)
+BC - Theta(1) - element is the head
+WC - Theta(n) - element is not in the map
+Overall complexity: O(n)
 */
 TValue Map::search(TKey c) const{
 	//TODO - Implementation
@@ -78,9 +80,8 @@ TValue Map::search(TKey c) const{
 /*
 Complexity:
 BC - Theta(1) key found at the beginning
-AC - Theta(n)
 WC - Theta(n) key not found in map
-Overall complexity - O(n)
+Overall complexity: O(n)
 */
 TValue Map::remove(TKey c){
 	//TODO - Implementation
@@ -90,30 +91,32 @@ TValue Map::remove(TKey c){
 	if (currentNode != NULL)
 	{
 		TValue oldValue = currentNode->data.second;
-		if (currentNode->next == NULL && currentNode->previous == NULL)
+		if (currentNode == this->head)
 		{
-			this->head = NULL;
+			if (currentNode == this->tail)
+			{
+				this->head = NULL;
+				this->tail = NULL;
+			}
+			else
+			{
+				this->head = this->head->next;
+				this->head->previous = NULL;
+			}
 		}
-		else if (currentNode->previous == NULL)
+		else if (currentNode == this->tail)
 		{
-			this->head->next->previous = NULL;
-			this->head = this->head->next;
-			delete currentNode;
-		}
-		else if (currentNode->next == NULL)
-		{
-			currentNode->previous->next = NULL;
-			delete currentNode;
+			this->tail = this->tail->previous;
+			this->tail->next = NULL;
 		}
 		else
 		{
-			Node* previousNode = currentNode->previous;
-			Node* nextNode = currentNode->next;
-			if (previousNode)
-				previousNode->next = nextNode;
-			nextNode->previous = previousNode;
-			delete currentNode;
+			currentNode->next->previous = currentNode->previous;
+			currentNode->previous->next = currentNode->next;
+			currentNode->previous = NULL;
+			currentNode->next = NULL;
 		}
+		delete currentNode;
 		return oldValue;
 	}
 	return NULL_TVALUE;
@@ -135,7 +138,7 @@ int Map::size() const {
 //Complexity - Theta(1)
 bool Map::isEmpty() const{
 	//TODO - Implementation
-	if (this->head == NULL)
+	if (this->head == NULL && this->tail == NULL)
 		return true;
 	return false;
 }

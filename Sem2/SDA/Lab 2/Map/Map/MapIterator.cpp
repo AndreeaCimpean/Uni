@@ -10,13 +10,13 @@ MapIterator::MapIterator(const Map& d) : map(d)
 	current_node = map.head;
 }
 
-
+//Complexity: Theta(1)
 void MapIterator::first() {
 	//TODO - Implementation
 	current_node = map.head;
 }
 
-
+//Complexity: Theta(1)
 void MapIterator::next() {
 	//TODO - Implementation
 	if (valid())
@@ -25,7 +25,7 @@ void MapIterator::next() {
 		throw exception();
 }
 
-
+//Complexity: Theta(1)
 TElem MapIterator::getCurrent(){
 	//TODO - Implementation
 	if (valid())
@@ -34,7 +34,7 @@ TElem MapIterator::getCurrent(){
 		throw exception();
 }
 
-
+//Complexity: Theta(1)
 bool MapIterator::valid() const {
 	//TODO - Implementation
 	return(current_node != NULL);

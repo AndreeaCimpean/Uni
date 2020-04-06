@@ -25,6 +25,7 @@ class Map {
 	private:
 		//TODO - Representation
 		Node* head;
+		Node* tail;
 
 	public:
 
