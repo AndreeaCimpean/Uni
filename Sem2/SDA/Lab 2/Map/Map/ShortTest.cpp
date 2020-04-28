@@ -3,6 +3,43 @@
 #include "Map.h"
 #include "MapIterator.h"
 
+void test_new_function()
+{
+	Map m;
+	m.add(5, 5);
+	m.add(6, 5);
+	m.add(7, 5);
+	m.add(8, 5);
+
+	MapIterator id = m.iterator();
+	id.first();
+	assert(id.remove() == TElem(5, 5));
+	assert(id.getCurrent() == TElem(6, 5));
+	assert(m.size() == 3);
+	id.remove();
+	id.remove();
+	assert(id.remove() == TElem(8,5));
+	assert(m.size() == 0);
+	try
+	{
+		id.next();
+		assert(false);
+	}
+	catch (...)
+	{
+		assert(true);
+	}
+	try
+	{
+		id.remove();
+		assert(false);
+	}
+	catch (...)
+	{
+		assert(true);
+	}
+}
+
 
 void testAll() { //call each function to see if it is implemented
 	Map m;

@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <iostream>
 #include <exception>
+#include <fstream>
 
 using namespace std;
 
@@ -101,12 +102,14 @@ void testAdd(Relation r) {
 	}
 	assert(sb.size() == 100);
 	assert(sb.isEmpty() == false);
+
 	testIterator(sb, r);
 
 	for (int i = 200; i >= -200; i--) {
 		sb.add(i);
 	}
 	assert(sb.size() == 501);
+
 	testIterator(sb, r);
 
 	for (int i = -300; i < 300; i++) {

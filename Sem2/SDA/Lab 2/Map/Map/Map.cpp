@@ -2,6 +2,7 @@
 #include "MapIterator.h"
 #include <stdio.h>
 
+//Complexity: Theta(1)
 Map::Map() {
 	//TODO - Implementation
 	this->head = NULL;
@@ -21,8 +22,8 @@ Map::~Map() {
 
 /*
 Complexity:
-BC - Theta(1) - element is the head
-WC - Theta(n) - element not in the map
+BC - Theta(1) - element is in the map and is the first(the head)
+WC - Theta(n) - element is not in the map
 Overall complexity: O(n)
 */
 TValue Map::add(TKey c, TValue v){
@@ -61,7 +62,7 @@ TValue Map::add(TKey c, TValue v){
 
 /*
 Complexity:
-BC - Theta(1) - element is the head
+BC - Theta(1) - element is the first in the map (the head)
 WC - Theta(n) - element is not in the map
 Overall complexity: O(n)
 */
@@ -79,8 +80,8 @@ TValue Map::search(TKey c) const{
 
 /*
 Complexity:
-BC - Theta(1) key found at the beginning
-WC - Theta(n) key not found in map
+BC - Theta(1) element is the first in the map(the head)
+WC - Theta(n) elemnt not found in the map
 Overall complexity: O(n)
 */
 TValue Map::remove(TKey c){
@@ -138,12 +139,12 @@ int Map::size() const {
 //Complexity - Theta(1)
 bool Map::isEmpty() const{
 	//TODO - Implementation
-	if (this->head == NULL && this->tail == NULL)
+	if (this->head == NULL)
 		return true;
 	return false;
 }
 
-MapIterator Map::iterator() const {
+MapIterator Map::iterator() {
 	return MapIterator(*this);
 }
 

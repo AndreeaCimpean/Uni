@@ -9,6 +9,7 @@ using namespace std;
 
 
 int main() {
+	test_new_function();
 	testAll();
 	testAllExtended();
 

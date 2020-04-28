@@ -6,7 +6,7 @@ using namespace std;
 
 SortedBagIterator::SortedBagIterator(const SortedBag& b) : bag(b) {
 	//TODO - Implementation
-	this->currentPosition = 0;
+	this->currentPosition = this->bag.head;
 	this->currentFrequency = 1;
 }
 
@@ -21,22 +21,27 @@ TComp SortedBagIterator::getCurrent() {
 bool SortedBagIterator::valid() {
 	//TODO - Implementation
 	if(this->currentPosition == -1)
-		return true;
-	return false;
+		return false;
+	return true;
 }
 
 void SortedBagIterator::next() {
 	//TODO - Implementation
 	if (this->valid())
 		if (this->currentFrequency == this->bag.frequencies[currentPosition])
+		{
 			this->currentPosition = this->bag.next[currentPosition];
+			this->currentFrequency = 1;
+		}
 		else
 			this->currentFrequency += 1;
+	else
+		throw exception();
 }
 
 void SortedBagIterator::first() {
 	//TODO - Implementation
-	this->currentPosition = 0;
+	this->currentPosition = this->bag.head;
 	this->currentFrequency = 1;
 }
 

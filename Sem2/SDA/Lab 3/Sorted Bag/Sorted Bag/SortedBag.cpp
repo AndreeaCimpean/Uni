@@ -6,7 +6,7 @@ using namespace std;
 
 SortedBag::SortedBag(Relation r) {
 	//TODO - Implementation
-	this->capacity = 1000;
+	this->capacity = 5;
 	this->elements = new TComp[capacity];
 	this->frequencies = new int[this->capacity];
 	this->next = new int[this->capacity];
@@ -47,7 +47,7 @@ void SortedBag::add(TComp e) {
 			for (int i = 0; i < this->capacity; ++i)
 			{
 				newElements[i] = this->elements[i];
-				newFrequencies[i] = this->elements[i];
+				newFrequencies[i] = this->frequencies[i];
 				newNext[i] = this->next[i];
 			}
 			for (int i = this->capacity; i < this->capacity * 2 - 1; ++i)
@@ -83,14 +83,11 @@ void SortedBag::add(TComp e) {
 			int newElement = this->firstEmpty;
 			this->firstEmpty = this->next[this->firstEmpty];
 			this->elements[newElement] = e;
-			this->elements[newElement] = 1;
+			this->frequencies[newElement] = 1;
 			this->next[newElement] = this->next[current_node];
 			this->next[current_node] = newElement;
 		}
 	}
-	for (int i = 0; i <= 5; ++i)
-		cout << this->next[i] << ' ';
-	cout << endl;
 }
 
 /*
@@ -119,9 +116,9 @@ bool SortedBag::remove(TComp e) {
 				this->head = this->next[this->head];
 			else
 				this->next[previous] = this->next[current];
+			this->next[current] = this->firstEmpty;
+			this->firstEmpty = current;
 		}
-		this->next[current] = this->firstEmpty;
-		this->firstEmpty = current;
 		return true;
 	}
 	return false;
@@ -138,7 +135,7 @@ bool SortedBag::search(TComp elem) const {
 	int current = this->head;
 	while (current != -1 && this->relation(this->elements[current], elem) && this->elements[current] != elem)
 		current = this->next[current];
-	if(this->elements[current] == elem)
+	if (this->elements[current] == elem)
 		return true;
 	return false;
 }

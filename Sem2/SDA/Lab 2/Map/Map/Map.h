@@ -50,7 +50,7 @@ class Map {
 	bool isEmpty() const;
 
 	//returns an iterator for the map
-	MapIterator iterator() const;
+	MapIterator iterator();
 
 	// destructor
 	~Map();

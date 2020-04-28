@@ -1,7 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0bee3de6-8c91-4102-bff6-1c8bc54e892f" name="Default Changelist" comment="" />
+    <list default="true" id="0bee3de6-8c91-4102-bff6-1c8bc54e892f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../OOP/Lab 6/.vs/Lab 6/v16/Browse.VC.db" beforeDir="false" afterPath="$PROJECT_DIR$/../../OOP/Lab 6/.vs/Lab 6/v16/Browse.VC.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../OOP/Lab 6/Lab 6/Lab6.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../../OOP/Lab 6/Lab 6/Lab6.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 2/Map/.vs/Map/v16/Browse.VC.db" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 2/Map/.vs/Map/v16/Browse.VC.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 2/Map/Map/Debug/Map.tlog/CL.command.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 2/Map/Map/Debug/Map.tlog/CL.command.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 2/Map/Map/Debug/Map.tlog/CL.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 2/Map/Map/Debug/Map.tlog/CL.read.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 2/Map/Map/Debug/Map.tlog/CL.write.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 2/Map/Map/Debug/Map.tlog/CL.write.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 2/Map/Map/Debug/Map.tlog/Map.lastbuildstate" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 2/Map/Map/Debug/Map.tlog/Map.lastbuildstate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 2/Map/Map/Debug/Map.tlog/link.command.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 2/Map/Map/Debug/Map.tlog/link.command.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 2/Map/Map/Debug/Map.tlog/link.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 2/Map/Map/Debug/Map.tlog/link.read.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 2/Map/Map/Debug/Map.tlog/link.write.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 2/Map/Map/Debug/Map.tlog/link.write.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 2/Map/Map/Debug/vc142.idb" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 2/Map/Map/Debug/vc142.idb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 2/Map/Map/Map.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 2/Map/Map/Map.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 2/Map/Map/MapIterator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 2/Map/Map/MapIterator.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/.vs/Sorted Bag/v16/Browse.VC.db" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/.vs/Sorted Bag/v16/Browse.VC.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/Sorted Bag/Debug/Sorted Bag.tlog/CL.command.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/Sorted Bag/Debug/Sorted Bag.tlog/CL.command.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/Sorted Bag/Debug/Sorted Bag.tlog/CL.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/Sorted Bag/Debug/Sorted Bag.tlog/CL.read.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/Sorted Bag/Debug/Sorted Bag.tlog/CL.write.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/Sorted Bag/Debug/Sorted Bag.tlog/CL.write.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/Sorted Bag/Debug/Sorted Bag.tlog/Sorted Bag.lastbuildstate" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/Sorted Bag/Debug/Sorted Bag.tlog/Sorted Bag.lastbuildstate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/Sorted Bag/Debug/Sorted Bag.tlog/link.command.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/Sorted Bag/Debug/Sorted Bag.tlog/link.command.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/Sorted Bag/Debug/Sorted Bag.tlog/link.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/Sorted Bag/Debug/Sorted Bag.tlog/link.read.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/Sorted Bag/Debug/Sorted Bag.tlog/link.write.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/Sorted Bag/Debug/Sorted Bag.tlog/link.write.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/Sorted Bag/Debug/vc142.idb" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/Sorted Bag/Debug/vc142.idb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/Sorted Bag/ExtendedTest.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/Sorted Bag/ExtendedTest.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/Sorted Bag/SortedBag.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/Sorted Bag/SortedBag.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/Sorted Bag/SortedBagIterator.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../SDA/Lab 3/Sorted Bag/Sorted Bag/SortedBagIterator.cpp" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,7 +41,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
   <component name="ProjectId" id="1YhZit30MlHRtV01lna56l75Bnh" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -85,6 +115,7 @@
       <workItem from="1584688804192" duration="1314000" />
       <workItem from="1585576773711" duration="3877000" />
       <workItem from="1585904662095" duration="771000" />
+      <workItem from="1586880386947" duration="21000" />
     </task>
     <servers />
   </component>
