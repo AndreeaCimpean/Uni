@@ -4,12 +4,14 @@
 
 using namespace std;
 
+//Complexity: Theta(1)
 SortedBagIterator::SortedBagIterator(const SortedBag& b) : bag(b) {
 	//TODO - Implementation
 	this->currentPosition = this->bag.head;
 	this->currentFrequency = 1;
 }
 
+//Complexity: Theta(1)
 TComp SortedBagIterator::getCurrent() {
 	//TODO - Implementation
 	if (this->valid())
@@ -18,6 +20,7 @@ TComp SortedBagIterator::getCurrent() {
 		throw exception();
 }
 
+//Complexity: Theta(1)
 bool SortedBagIterator::valid() {
 	//TODO - Implementation
 	if(this->currentPosition == -1)
@@ -25,6 +28,7 @@ bool SortedBagIterator::valid() {
 	return true;
 }
 
+//Complexity: Theta(1)
 void SortedBagIterator::next() {
 	//TODO - Implementation
 	if (this->valid())
@@ -39,6 +43,7 @@ void SortedBagIterator::next() {
 		throw exception();
 }
 
+//Complexity: Theta(1)
 void SortedBagIterator::first() {
 	//TODO - Implementation
 	this->currentPosition = this->bag.head;

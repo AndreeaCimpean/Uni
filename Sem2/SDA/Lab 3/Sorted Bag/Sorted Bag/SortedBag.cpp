@@ -1,9 +1,9 @@
 #include "SortedBag.h"
 #include "SortedBagIterator.h"
-#include <iostream>
 
 using namespace std;
 
+//Complexity: Theta(1) 
 SortedBag::SortedBag(Relation r) {
 	//TODO - Implementation
 	this->capacity = 5;
@@ -73,11 +73,11 @@ void SortedBag::add(TComp e) {
 		}
 		else
 		{
-			int current_position = 0;
+			int i = 0;
 			int current_node = this->head;
-			while (current_position < position - 1)
+			while (i < position - 1)
 			{
-				current_position++;
+				i++;
 				current_node = this->next[current_node];
 			}
 			int newElement = this->firstEmpty;
@@ -105,7 +105,7 @@ bool SortedBag::remove(TComp e) {
 		previous = current;
 		current = this->next[current];
 	}
-	if (this->elements[current] == e)
+	if (current != -1 && this->elements[current] == e)
 	{
 		this->length--;
 		if (frequencies[current] > 1)
@@ -133,10 +133,12 @@ Overall complexity: O(n)
 bool SortedBag::search(TComp elem) const {
 	//TODO - Implementation
 	int current = this->head;
-	while (current != -1 && this->relation(this->elements[current], elem) && this->elements[current] != elem)
+	while (current != -1 && this->relation(this->elements[current], elem))
+	{
+		if (this->elements[current] == elem)
+			return true;
 		current = this->next[current];
-	if (this->elements[current] == elem)
-		return true;
+	}
 	return false;
 }
 
@@ -149,10 +151,12 @@ Overall complexity: O(n)
 int SortedBag::nrOccurrences(TComp elem) const {
 	//TODO - Implementation
 	int current = this->head;
-	while (current != -1 && this->relation(this->elements[current], elem) && this->elements[current] != elem)
+	while (current != -1 && this->relation(this->elements[current], elem))
+	{
+		if(this->elements[current] == elem)
+			return this->frequencies[current];
 		current = this->next[current];
-	if (this->elements[current] == elem)
-		return this->frequencies[current];
+	}
 	return 0;
 }
 
@@ -166,7 +170,7 @@ int SortedBag::size() const {
 //Complexity: Theta(1)
 bool SortedBag::isEmpty() const {
 	//TODO - Implementation
-	if (this->head == -1)
+	if (this->length == 0)
 		return true;
 	return false;
 }
