@@ -2,12 +2,46 @@
 #include "SortedBag.h"
 #include "SortedBagIterator.h"
 #include <assert.h>
+#include <iostream>
+
+using namespace std;
 
 bool relation1(TComp e1, TComp e2) {
 	return e1 <= e2;
 }
 
+void test_new_function()
+{
+	SortedBag sb(relation1);
+	sb.add(5);
+	sb.add(6);
+	sb.add(0);
+	sb.add(5);
+	sb.add(10);
+	sb.add(8);
+	SortedBagIterator it = sb.iterator();
+	it.next();
+	it.next();
+	it.next();
+	it.previous();
+	assert(it.getCurrent() == 5);
+	it.previous();
+	assert(it.getCurrent() == 5);
+	it.previous();
+	assert(it.getCurrent() == 0);
+	it.previous();
+	try
+	{
+		it.getCurrent();
+	}
+	catch (...)
+	{
+		assert(true);
+	}
+}
+
 void testAll() {
+	test_new_function();
 	SortedBag sb(relation1);
 	sb.add(5);
 	sb.add(6);

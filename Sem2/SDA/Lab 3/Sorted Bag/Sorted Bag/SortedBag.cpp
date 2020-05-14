@@ -1,12 +1,13 @@
 #include "SortedBag.h"
 #include "SortedBagIterator.h"
+#define INIT_CAPACITY 5;
 
 using namespace std;
 
-//Complexity: Theta(1) 
+//Complexity: Theta(c), where c is the initial capacity 
 SortedBag::SortedBag(Relation r) {
 	//TODO - Implementation
-	this->capacity = 5;
+	this->capacity = INIT_CAPACITY;
 	this->elements = new TComp[capacity];
 	this->frequencies = new int[this->capacity];
 	this->next = new int[this->capacity];
@@ -65,9 +66,10 @@ void SortedBag::add(TComp e) {
 		if (position == 0)
 		{
 			int newPosition = this->firstEmpty;
+			this->firstEmpty = this->next[this->firstEmpty];
+
 			this->elements[newPosition] = e;
 			this->frequencies[newPosition] = 1;
-			this->firstEmpty = this->next[this->firstEmpty];
 			this->next[newPosition] = this->head;
 			this->head = newPosition;
 		}
@@ -80,12 +82,13 @@ void SortedBag::add(TComp e) {
 				i++;
 				current_node = this->next[current_node];
 			}
-			int newElement = this->firstEmpty;
+			int newPosition = this->firstEmpty;
 			this->firstEmpty = this->next[this->firstEmpty];
-			this->elements[newElement] = e;
-			this->frequencies[newElement] = 1;
-			this->next[newElement] = this->next[current_node];
-			this->next[current_node] = newElement;
+
+			this->elements[newPosition] = e;
+			this->frequencies[newPosition] = 1;
+			this->next[newPosition] = this->next[current_node];
+			this->next[current_node] = newPosition;
 		}
 	}
 }
@@ -127,7 +130,7 @@ bool SortedBag::remove(TComp e) {
 /*
 Complexity:
 BC - Theta(1) - element found on the first position/element "smaller" than all elements
-WC - Theta(n) - element not in the bag and "greater"than all elemnts 
+WC - Theta(n) - element not in the bag and "greater" than all elements 
 Overall complexity: O(n)
 */
 bool SortedBag::search(TComp elem) const {

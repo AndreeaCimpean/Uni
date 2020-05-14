@@ -20,5 +20,6 @@ public:
 	bool valid();
 	void next();
 	void first();
+	void previous();
 };
 
