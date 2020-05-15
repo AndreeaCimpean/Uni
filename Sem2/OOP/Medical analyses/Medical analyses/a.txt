@@ -1,0 +1,1 @@
+date: 2020.05.02 type: BP systolic value: 60 diastolic value: 10 result: not okdate: 2020.05.02 type: BMI value: 19.400000 result: ok

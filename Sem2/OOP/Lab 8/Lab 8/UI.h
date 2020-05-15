@@ -4,9 +4,9 @@
 class UI
 {
 private:
-	Service service;
+	Service& service;
 public:
-	UI(const Service& service) : service{service} {}
+	UI(Service& service) : service{service} {}
 	void run();
 	void add_evidence(const Evidence& evidence);
 	void update_evidence(const Evidence& evidence);
@@ -17,5 +17,7 @@ public:
 	void list_physical_copies() const;
 	void list_evidences_filtered_by_measurements_and_quantity(const std::string& measurement, double quantity) const;
 	void set_file(const std::string& file);
+	void undo();
+	void redo();
 };
 

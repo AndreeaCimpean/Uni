@@ -1,0 +1,4 @@
+Building address: Str. Ana nr. 5 year of construction: 1000
+	Block: total apartments: 60 occupied apartments: 0
+Building address: Str. Ana nr. 9 year of construction: 1000
+	House: type: duplex historical: no

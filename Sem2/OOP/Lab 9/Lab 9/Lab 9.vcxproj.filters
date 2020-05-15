@@ -42,6 +42,12 @@
     <ClInclude Include="MyExceptions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HTMLRepository.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSVRepository.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Evidence.cpp">
@@ -69,6 +75,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MyExceptions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HTMLRepository.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CSVRepository.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -9,7 +9,7 @@ using namespace std;
 
 int main()
 {
-	test_all();/*
+	//test_all();
 	{
 		//MemoryRepository repository{};
 		TextFileRepository repository{};
@@ -17,6 +17,6 @@ int main()
 		UI ui{ service };
 		ui.run();
 	}
-	_CrtDumpMemoryLeaks();*/
+	_CrtDumpMemoryLeaks();
 	return 0;
 }

@@ -1,0 +1,2 @@
+date: 2020.05.01 type: BP systolic value: 12diastolic value: 45
+date: 2020.05.02 type: BMI value: 19.100000

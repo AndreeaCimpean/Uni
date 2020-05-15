@@ -138,9 +138,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Action.h" />
+    <ClInclude Include="ActionAdd.h" />
+    <ClInclude Include="ActionRemove.h" />
+    <ClInclude Include="ActionUpdate.h" />
     <ClInclude Include="Evidence.h" />
     <ClInclude Include="MemoryRepository.h" />
     <ClInclude Include="RepositoryInterafce.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Service.h" />
     <ClInclude Include="tests.h" />
     <ClInclude Include="TextFileRepository.h" />
@@ -148,6 +153,10 @@
     <ClInclude Include="Validations.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Action.cpp" />
+    <ClCompile Include="ActionAdd.cpp" />
+    <ClCompile Include="ActionRemove.cpp" />
+    <ClCompile Include="ActionUpdate.cpp" />
     <ClCompile Include="Evidence.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MemoryRepository.cpp" />
@@ -156,6 +165,9 @@
     <ClCompile Include="TextFileRepository.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Validations.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Lab 8.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

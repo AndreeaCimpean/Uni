@@ -1,0 +1,1 @@
+address: Str. Ana nr. 4 year of construction: 1000 type: House type of house: duplex historical: no

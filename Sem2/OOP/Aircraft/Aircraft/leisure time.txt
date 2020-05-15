@@ -1,0 +1,1 @@
+Aircraft id: 1 model: 1 maximum altitude: 12.000000 activities: leisure time, military, medical emergencies, public transformation Helicopter: is privateAircraft id: 2 model: 2 maximum altitude: 12.000000 activities: leisure time, military, public transportation Plane: is private main wings: biplane

@@ -3,13 +3,13 @@
 
 class TextFileRepository : public Repository
 {
-private:
+protected:
 	std::string fileName;
-	std::vector<Evidence> get_evidences_from_file() const;
-	void save_evidences_to_file(std::vector<Evidence> evidences) const;
 public:
+	virtual std::vector<Evidence> get_evidences_from_file() const;
+	virtual void save_evidences_to_file(std::vector<Evidence> evidences) const;
 	TextFileRepository() : Repository{} {};
-	void add_evidence(const Evidence& evidence) override;
+	virtual void add_evidence(const Evidence& evidence) override;
 	int find_evidence_by_id(const std::string& id) const override;
 	void update_evidence(const std::string& id, const std::string& measurement, const double imageClarityLevel, const int quantity, const std::string& photograph) override;
 	void delete_evidence(const std::string& id) override;

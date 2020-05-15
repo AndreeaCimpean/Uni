@@ -43,14 +43,8 @@ void TextFileRepository::add_evidence(const Evidence& evidence)
 	*/
 	if (!this->find_evidence_by_id(evidence.get_id()))
 	{
-		ifstream file(this->fileName);
-		bool is_empty_file = (file.peek() == std::ifstream::traits_type::eof());
-		file.close();
 		ofstream output_file(this->fileName, ios::app);
-		if (is_empty_file)
-			output_file << evidence;
-		else
-			output_file << endl << evidence;
+		output_file << evidence << endl;
 		output_file.close();
 	}
 	else

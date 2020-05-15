@@ -138,8 +138,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CSVRepository.h" />
     <ClInclude Include="Evidence.h" />
     <ClInclude Include="EvidenceValidator.h" />
+    <ClInclude Include="HTMLRepository.h" />
     <ClInclude Include="MemoryRepository.h" />
     <ClInclude Include="MyExceptions.h" />
     <ClInclude Include="RepositoryInterafce.h" />
@@ -149,8 +151,10 @@
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CSVRepository.cpp" />
     <ClCompile Include="Evidence.cpp" />
     <ClCompile Include="EvidenceValidator.cpp" />
+    <ClCompile Include="HTMLRepository.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MemoryRepository.cpp" />
     <ClCompile Include="MyExceptions.cpp" />

@@ -15,7 +15,8 @@ int main()
 		//MemoryRepository repository{};
 		TextFileRepository repository{};
 		EvidenceValidator evidenceValidator;
-		Service service{ evidenceValidator, repository };
+		TextFileRepository physicalCopiesRepository{};
+		Service service{ evidenceValidator, repository, physicalCopiesRepository };
 		UI ui{ service };
 		ui.run();
 	}

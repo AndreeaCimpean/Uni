@@ -1,0 +1,2 @@
+Building address: Str. Ana nr. 9 year of construction: 1000
+	House: type: duplex historical: no

@@ -1,0 +1,2 @@
+address: Str. 1 Mai nr. 4 year of construction: 1998 type: Block total apartments: 30 occupied apartments: 0
+address: Str. Ana nr. 4 year of construction: 1000 type: House type of house: duplex historical: no

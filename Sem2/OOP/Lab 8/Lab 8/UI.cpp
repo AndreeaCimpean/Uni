@@ -166,6 +166,10 @@ void UI::run()
 			else
 				cout << "Wrong mode!";
 		}
+		else if(command == "undo")
+			this->undo();
+		else if(command == "redo")
+			this->redo();
 		else if (command != "exit")
 			cout << "Wrong command!";
 		cin >> command;
@@ -257,5 +261,29 @@ void UI::set_file(const std::string& file)
 	catch (const char* message)
 	{
 		cout << message;
+	}
+}
+
+void UI::undo()
+{
+	try
+	{
+		this->service.undo();
+	}
+	catch (const char* message)
+	{
+		cout << message << endl;
+	}
+}
+
+void UI::redo()
+{
+	try
+	{
+		this->service.redo();
+	}
+	catch (const char* message)
+	{
+		cout << message << endl;
 	}
 }

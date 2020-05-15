@@ -1,0 +1,4 @@
+Building address: Str. Dana nr. 5 year of construction: 1000
+	Block: total apartments: 60 occupied apartments: 0
+Building address: Str Unu nr. 3 year of construction: 1000
+	House: type: duplex historical: no

@@ -2,14 +2,18 @@
 #include "TextFileRepository.h"
 #include "MemoryRepository.h"
 #include "Validations.h"
-#include <vector>
 #include <algorithm>
+#include "ActionAdd.h"
+#include "ActionRemove.h"
+#include "ActionUpdate.h"
 
 using namespace std;
 
 void Service::add_evidence(const Evidence& evidence)
 {
 	this->repository.add_evidence(evidence);
+	unique_ptr<Action> actionUndo = make_unique<ActionAdd>(evidence, this->repository);
+	this->undoStack.push_back(move(actionUndo));
 }
 
 void Service::update_evidence(const std::string& id, const std::string& measurement, double imageClarityLevel, double quantity, const std::string& photograph)
@@ -17,7 +21,14 @@ void Service::update_evidence(const std::string& id, const std::string& measurem
 	/*
 	Update an evidence in the list of evidences and in the physical copies as well
 	*/
+	Evidence evidence_before = this->get_evidence_by_id(id);
+
 	this->repository.update_evidence(id, measurement, imageClarityLevel, quantity, photograph);
+
+	Evidence evidence_after = this->get_evidence_by_id(id);
+	unique_ptr<Action> actionUndo = make_unique<ActionUpdate>(evidence_before, evidence_after, this->repository);
+	this->undoStack.push_back(move(actionUndo));
+
 	int evidence_index = this->find_evidence_index_in_physical_copies_by_id(id);
 	if (evidence_index != -1)
 	{
@@ -33,7 +44,12 @@ void Service::delete_evidence(const std::string& id)
 	/*
 	Delete an evidence from the list of evidences and from the physical copies as well
 	*/
+	Evidence evidence_before = this->get_evidence_by_id(id);
 	this->repository.delete_evidence(id);
+
+	unique_ptr<Action> actionUndo = make_unique<ActionRemove>(evidence_before, this->repository);
+	this->undoStack.push_back(move(actionUndo));
+
 	int evidence_index= this->find_evidence_index_in_physical_copies_by_id(id);
 	if (evidence_index != -1)
 		this->physicalCopies.erase(this->physicalCopies.begin() + evidence_index);
@@ -132,5 +148,28 @@ void Service::set_file(const std::string& file)
 	catch (bad_cast)
 	{
 		throw "Wrong repository type!"; }
+}
+
+Evidence Service::get_evidence_by_id(const std::string& id)
+{
+	return this->repository.get_evidence_by_id(id);
+}
+
+void Service::undo()
+{
+	if (this->undoStack.size() == 0)
+		throw "No more undos! ";
+	this->undoStack.back()->execute_undo();
+	this->redoStack.push_back(move(undoStack.back()));
+	this->undoStack.pop_back();
+}
+
+void Service::redo()
+{
+	if (this->redoStack.size() == 0)
+		throw "No more redos! ";
+	this->redoStack.back()->execute_redo();
+	this->undoStack.push_back(move(this->redoStack.back()));
+	this->redoStack.pop_back();
 }
 

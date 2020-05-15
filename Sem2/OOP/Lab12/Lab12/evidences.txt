@@ -1,0 +1,11 @@
+zzz,4X10X6,0.7,0.1,def
+ghi,4X10X6,0.9,0.1,ghi
+aaa,4X1X6,0.8,0.2,abc.jpg
+bbb,4X1X6,0.8,0.2,abc.jpg
+ccc,4X12X6,0.8,0.2,abc.jpg
+ddd,4X1X6,0.8,0.2,abc.jpg
+eee,4X12X6,0.8,0.2,abc.jpg
+fff,4X1X6,0.8,0.2,abc.jpg
+ggg,4X1X6,0.8,0.2,abc.jpg
+hhh,4X12X6,0.8,0.2,abc.jpg
+iii,4X1X6,0.8,0.2,abc.jpg

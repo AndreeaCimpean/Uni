@@ -21,11 +21,3 @@ const char* RepositoryException::what() const noexcept
 	return message.c_str();
 }
 
-ServiceException::ServiceException(std::string _message) : message{ _message }
-{
-}
-
-const char* ServiceException::what() const noexcept
-{
-	return message.c_str();
-}
